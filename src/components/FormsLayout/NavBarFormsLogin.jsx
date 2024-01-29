@@ -73,7 +73,7 @@ export function NavBarFormsLogin({ loginG }) {
           </div>
            */}
           <div
-            className="h-auto  bg-light-blue-700 flex items-center justify-center mt-4 cursor-pointer text-center mx-auto w-full rounded-lg shadow-2xl hover:shadow-white hover:bg-light-blue-500 p-2"
+            className="h-auto  bg-light-blue-700 flex items-center justify-center mt-4 cursor-pointer text-center mx-auto w-full rounded-lg shadow-2xl hover:shadow-white hover:bg-light-blue-500 p-1"
             onClick={() => setOpenIniciarSesion(true)}
           >
             {/* 
@@ -81,7 +81,7 @@ export function NavBarFormsLogin({ loginG }) {
               <UserIcon className="h-10 w-10 rounded-full" color="white" />
             </div>
             */}
-            <Typography variant="h4" color="white">
+            <Typography variant="h5" color="white">
               Iniciar Sesion
             </Typography>
           </div>

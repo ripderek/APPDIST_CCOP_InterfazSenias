@@ -33,7 +33,7 @@ export default function Info() {
           conocimientos especializados ni de programar.
         </Typography>
         <Button className="flex items-center gap-2 bg-light-blue-800">
-          <Typography variant="h4" color="white" className="">
+          <Typography variant="h4" color="white" className="capitalize">
             Empezar
           </Typography>
         </Button>

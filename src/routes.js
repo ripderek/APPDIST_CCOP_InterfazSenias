@@ -8,7 +8,6 @@ import {
 } from "@heroicons/react/24/solid";
 //Importa todos los componentes que tiene la carpta MenuLateral mediante el index.js
 //import { Home, Profile, Tables, Notifications } from "@/pages/dashboard";
-
 //aqui es para particionar la barra en otra seccion
 //import { SignIn, SignUp } from "@/pages/auth";
 
@@ -26,6 +25,12 @@ export const routes = [
                 icon: <AdjustmentsHorizontalIcon {...icon} />,
                 name: "Senas",
                 path: "/Senas",
+                //element: <Notifications />,
+            },
+            {
+                icon: <AdjustmentsHorizontalIcon {...icon} />,
+                name: "Crear Sena",
+                path: "/Opciones/CrearSenia",
                 //element: <Notifications />,
             },
         ],

@@ -65,9 +65,7 @@ export function Navbar_app({ user_name, titulo }) {
             variant="h4"
             //color={sidenavColor === "dark" ? "black" : "white"}
             className={`mb-2 text-light-blue-900`}
-          >
-            {titulo}
-          </Typography>
+          ></Typography>
         </div>
 
         <div className="flex items-center">
