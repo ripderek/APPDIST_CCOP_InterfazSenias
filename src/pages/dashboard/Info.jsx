@@ -25,12 +25,12 @@ export default function Info() {
           Senias APP
         </Typography>
         <Typography variant="h4" color="black" className="mb-8">
-          Prepara a un ordenador para que reconozca tus imágenes
+          Prepara a una red neuronal para que reconozca tus imágenes
         </Typography>
         <Typography color="gray" className="mb-8 font-normal">
           Una forma rápida y sencilla de crear modelos de aprendizaje automático
-          para tus sitios web, aplicaciones y mucho más, sin necesidad de
-          conocimientos especializados ni de programar.
+          para reconcer y traducir señas, sin necesidad de conocimientos
+          especializados ni de programar.
         </Typography>
         <Button className="flex items-center gap-2 bg-light-blue-800">
           <Typography variant="h4" color="white" className="capitalize">

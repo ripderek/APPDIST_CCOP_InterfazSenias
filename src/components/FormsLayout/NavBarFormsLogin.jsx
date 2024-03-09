@@ -73,7 +73,7 @@ export function NavBarFormsLogin({ loginG }) {
           </div>
            */}
           <div
-            className="h-auto  bg-light-blue-700 flex items-center justify-center mt-4 cursor-pointer text-center mx-auto w-full rounded-lg shadow-2xl hover:shadow-white hover:bg-light-blue-500 p-1"
+            className="h-auto  bg-light-blue-700 flex items-center justify-center mt-4 cursor-pointer text-center mx-auto w-full rounded-lg shadow-2xl hover:shadow-white hover:bg-light-blue-500 p-2"
             onClick={() => setOpenIniciarSesion(true)}
           >
             {/* 

@@ -1,4 +1,3 @@
-
 import { IconButton } from "@material-tailwind/react";
 import { Cog6ToothIcon } from "@heroicons/react/24/solid";
 import { Dialog_Error, Loader } from "@/widgets";
@@ -17,16 +16,28 @@ import {
 } from "@/context";
 import React from "react";
 import Cookies from "universal-cookie";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Head from "next/head";
 
-export default function Senas() {
+import { CrearSeniaOP, GenerarModeloOP } from "@/pages/OP";
+//IMPORT DE LA WEBCAM
+import Webcam from "react-webcam";
+
+export default function GenerarModelo() {
   const [controller, dispatch] = useMaterialTailwindController();
   const { sidenavType, sidenavColor } = controller;
+  //ejemplo para caputar la imagen
+  const webcamRef = useRef(null);
+
+  const capture = () => {
+    const imageSrc = webcamRef.current.getScreenshot();
+    //enviar a la API POR EJEMPLO xd
+    console.log(imageSrc);
+  };
   return (
     <div className=" min-h-screen bg-blue-gray-50/50">
       <Head>
-        <title>Inicio</title>
+        <title>CrearSenia</title>
       </Head>
       <BarraNavegacion2
         routes={routes}
@@ -40,13 +51,13 @@ export default function Senas() {
         <IconButton
           size="lg"
           color="white"
-          className={`fixed bottom-8 right-8 z-40 rounded-full shadow-blue-gray-900 shadow-2xl border-x-4 border-y-4 border-light-blue-900`}
+          className={`fixed bottom-8 right-8 z-40 rounded-full shadow-blue-gray-900 shadow-2xl border-x-4 border-y-4 border-blue-700`}
           ripple={false}
           onClick={() => setOpenConfigurator(dispatch, true)}
         >
           <Cog6ToothIcon className="h-5 w-5" />
         </IconButton>
-        AQUI VA EL MENU XD
+        <GenerarModeloOP />
       </div>
     </div>
   );

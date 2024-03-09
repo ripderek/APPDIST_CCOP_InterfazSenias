@@ -17,6 +17,7 @@ import {
 import React from "react";
 import Cookies from "universal-cookie";
 import { useState, useEffect, useRef } from "react";
+import Head from "next/head";
 
 import { CrearSeniaOP } from "@/pages/OP";
 //IMPORT DE LA WEBCAM
@@ -35,6 +36,9 @@ export default function CrearSenia({ id }) {
   };
   return (
     <div className=" min-h-screen bg-blue-gray-50/50">
+      <Head>
+        <title>CrearSenia</title>
+      </Head>
       <BarraNavegacion2
         routes={routes}
         brandImg={

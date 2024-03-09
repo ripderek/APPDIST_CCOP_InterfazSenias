@@ -5,6 +5,7 @@ import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import { useRouter } from 'next/router';
+import Head from "next/head";
 
 export default function index() {
   const Router = useRouter();
@@ -44,11 +45,11 @@ export default function index() {
   });
   return (
     <>
+      <Head>
+        <title>Inicio de Sesion</title>
+      </Head>
       <NavBarFormsLogin loginG={loginG} />
-
-
       <Info />
-
     </>
   )
 }

@@ -3,7 +3,8 @@
 import {
     UserCircleIcon,
     ChartBarSquareIcon,
-    AdjustmentsHorizontalIcon
+    AdjustmentsHorizontalIcon,
+    ArrowUpOnSquareStackIcon
 
 } from "@heroicons/react/24/solid";
 //Importa todos los componentes que tiene la carpta MenuLateral mediante el index.js
@@ -33,6 +34,25 @@ export const routes = [
                 path: "/Opciones/CrearSenia",
                 //element: <Notifications />,
             },
+            {
+                icon: <AdjustmentsHorizontalIcon {...icon} />,
+                name: "Test Senia",
+                path: "/Opciones/TestSenia",
+                //element: <Notifications />,
+            },
+            {
+                icon: <AdjustmentsHorizontalIcon {...icon} />,
+                name: "Administrar Modelo",
+                path: "/Opciones/AdminModelo",
+                //element: <Notifications />,
+            },
+            {
+                icon: <ArrowUpOnSquareStackIcon {...icon} />,
+                name: "Generar Modelo",
+                path: "/Opciones/GenerarModelo",
+                //element: <Notifications />,
+            },
+
         ],
     },
     {
@@ -45,12 +65,7 @@ export const routes = [
                 path: "/notifications",
                 //element: <Notifications />,
             },
-            {
-                icon: <UserCircleIcon {...icon} />,
-                name: "Mis reportes",
-                path: "/notifications",
-                //element: <Notifications />,
-            },
+
             {
                 icon: <UserCircleIcon {...icon} />,
                 name: "Configuracion",
