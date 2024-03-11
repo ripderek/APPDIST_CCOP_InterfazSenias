@@ -37,7 +37,7 @@ export default function GenerarModelo() {
   return (
     <div className=" min-h-screen bg-blue-gray-50/50">
       <Head>
-        <title>CrearSenia</title>
+        <title>Generar Modelo</title>
       </Head>
       <BarraNavegacion2
         routes={routes}

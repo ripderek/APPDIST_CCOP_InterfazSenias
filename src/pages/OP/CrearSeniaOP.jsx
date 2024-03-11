@@ -48,9 +48,8 @@ export default function CrearSeniaOP({ id_seccion }) {
 
   const toggleOpen = () => setOpen((cur) => !cur);
 
-  const [openRecursos, setOpenRecursos] = useState(false);
-  const toggleOpenRecursos = () => setOpenRecursos(!openRecursos);
-
+  const [openCalculadora, setOpenCalculadora] = useState(false);
+  const toggleOpenCalculadora = () => setOpenCalculadora((cur) => !cur);
   const [imgBase64, setImgBase64] = useState([]);
   const capture = () => {
     if (canvasCtx1 && canvasIsReady && canvasHaveLandmarks) {
@@ -224,6 +223,8 @@ export default function CrearSeniaOP({ id_seccion }) {
     // Actualizar el estado con los nuevos datos
     setImgBase64(nuevosDatos);
   };
+  const [openRecursos, setOpenRecursos] = useState(false);
+  const toggleOpenRecursos = () => setOpenRecursos((cur) => !cur);
   //funcion para guardar la senia con las imagenes en el RPC
   const GuardarSenia = async () => {
     console.log({ Nombre: NombreSenia, imagenes: imgBase64 });
@@ -363,35 +364,46 @@ export default function CrearSeniaOP({ id_seccion }) {
             </Card>
           </Collapse>
           {/* OPCIONES DE LA SENIA*/}
-
-          <Card className="my-4 mx-auto w-full h-full">
-            <CardBody>
-              <Card className="my-4 mx-auto w-full shadow-none">
-                <CardBody className="flex flex-col gap-4">
-                  {imgBase64.length != 0 ? (
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 p-5">
-                      {imgBase64.map(({ img, id }, index) => (
-                        <div className="bg-white shadow-xl  rounded-xl cursor-pointer ">
-                          <img key={id} src={img} alt={`Imagen ${index}`} />
-                          <div className="w-auto flex ml-2 mb-2">
-                            <Chip
-                              variant="ghost"
-                              size="sm"
-                              color="orange"
-                              value={"Eliminar"}
-                              onClick={() => eliminarDato(id)}
-                            />
+          <Button
+            onClick={toggleOpenCalculadora}
+            variant="filled"
+            color="white"
+            className="w-full text-black text-lg capitalize flex items-center justify-center mt-3"
+          >
+            <CogIcon className="h-7 w-7 mr-2" />
+            <p className="mt-1">Imagenes</p>
+          </Button>
+          <Collapse open={openCalculadora}>
+            <Card className="my-4 mx-auto w-full h-full">
+              <CardBody>
+                <Card className="my-4 mx-auto w-full shadow-none">
+                  <CardBody className="flex flex-col gap-4">
+                    {imgBase64.length != 0 ? (
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 p-5">
+                        {imgBase64.map(({ img, id }, index) => (
+                          <div className="bg-white shadow-xl  rounded-xl cursor-pointer ">
+                            <img key={id} src={img} alt={`Imagen ${index}`} />
+                            <div className="w-auto flex ml-2 mb-2">
+                              <Chip
+                                variant="ghost"
+                                size="sm"
+                                color="orange"
+                                value={"Eliminar"}
+                                onClick={() => eliminarDato(id)}
+                              />
+                            </div>
                           </div>
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    "No hay imagenes"
-                  )}
-                </CardBody>
-              </Card>
-            </CardBody>
-          </Card>
+                        ))}
+                      </div>
+                    ) : (
+                      "No hay imagenes"
+                    )}
+                  </CardBody>
+                </Card>
+              </CardBody>
+            </Card>
+          </Collapse>
+
           {/* 
           <Button
             onClick={toggleOpenCalculadora}
