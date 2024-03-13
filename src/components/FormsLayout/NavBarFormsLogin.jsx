@@ -37,7 +37,7 @@ import {
 } from "@/context";
 import { useState } from "react";
 
-export function NavBarFormsLogin({ loginG }) {
+export function NavBarFormsLogin({ loginG, LoginNormal }) {
   const [controller, dispatch] = useMaterialTailwindController();
   const { fixedNavbar, openSidenav, sidenavColor } = controller;
   //abrir el dialog para iniciar sesion ya sea con google o con usuario local xd
@@ -133,8 +133,8 @@ export function NavBarFormsLogin({ loginG }) {
 
             <Button
               className="mt-6 bg-light-blue-900 font-bold "
-              type="submit"
               fullWidth
+              onClick={() => LoginNormal(user)}
             >
               Aceptar
             </Button>
@@ -167,5 +167,4 @@ export function NavBarFormsLogin({ loginG }) {
 }
 
 NavBarFormsLogin.displayName = "/src/widgets/layout/dashboard-navbar.jsx";
-
 export default NavBarFormsLogin;

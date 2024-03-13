@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
 import { NavBarFormsLogin } from '@/components/FormsLayout'
 import { Info } from '@/pages/dashboard'
 import { useGoogleLogin } from "@react-oauth/google";
@@ -6,9 +6,11 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 import { useRouter } from 'next/router';
 import Head from "next/head";
+import { Loader } from "@/widgets";
 
 export default function index() {
   const Router = useRouter();
+  const [load, setLoader] = useState(false);
 
   //funcion para el inicio de sesion skere modo diablo
   const loginG = useGoogleLogin({
@@ -35,20 +37,82 @@ export default function index() {
           cookies.set("Nombres", nombres_completos, { path: "/" });
           cookies.set("foto", foto, { path: "/" });
           cookies.set("email", email, { path: "/" });
+          GoogleLogin(email);
         }
         //http://localhost:3000/dashboard/Senas
-        Router.push("/dashboard/Senas");
       } catch (error) {
         console.log(error);
       }
     },
   });
+  const GoogleLogin = async (email) => {
+    try {
+      setLoader(true);
+      console.log(email);
+      const result = await axios.post(
+        process.env.NEXT_PUBLIC_ACCESLINK + "auth/LoginG",
+        { email },
+        {
+          withCredentials: true,
+        }
+      );
+      //console.log("asdas", result);
+
+      const cookies = new Cookies();
+      //Cookie para el token
+      cookies.set("myTokenName", result.data.token, { path: "/" }); //enviar cokiee y almacenarla
+      //Cookie para el id del usuario
+      cookies.set("id_user", result.data.id, { path: "/" });
+      setLoader(false);
+      //para abrir la nueva ruta en la misma pestana
+      //Router.push("/dashboard/Home");
+      Router.push("/dashboard/Senas");
+
+    } catch (error) {
+      console.log(error);
+      setLoader(false);
+      alert(error.response.data.error);
+    }
+  };
+
+  //FUNCION PARA INICIAR SESION CON CORREO Y CONTRASENA
+  const IncioSesion = async (user) => {
+    //e.preventDefault();
+    //process.env.NEXT_PUBLIC_ACCESLINK
+    //Router.push("/Inicio");
+    setLoader(true);
+    try {
+      const result = await axios.post(
+        process.env.NEXT_PUBLIC_ACCESLINK + "auth/Login",
+        user,
+        {
+          withCredentials: true,
+        }
+      );
+      const cookies = new Cookies();
+      //Cookie para el token
+      cookies.set("myTokenName", result.data.token, { path: "/" }); //enviar cokiee y almacenarla
+      //Cookie para el id del usuario
+      cookies.set("id_user", result.data.id, { path: "/" });
+      setLoader(false);
+      Router.push("/dashboard/Senas");
+    } catch (error) {
+      console.log(error);
+      setLoader(false);
+      //colocar una alerta de error cuando no se pueda inciar sesion
+      //setError(true);
+      alert(error.response.data.error);
+    }
+  }
+
   return (
     <>
+      {load ? <Loader /> : ""}
+
       <Head>
         <title>Inicio de Sesion</title>
       </Head>
-      <NavBarFormsLogin loginG={loginG} />
+      <NavBarFormsLogin loginG={loginG} LoginNormal={IncioSesion} />
       <Info />
     </>
   )

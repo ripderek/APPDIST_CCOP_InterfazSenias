@@ -228,7 +228,7 @@ export default function Test_Senia_OP() {
         jsonrpc: "2.0",
         method: "PredecirImagen",
         //el segundo parametro es el modelo a usar para la prediccion
-        params: [splitString[1], "Modelo20240310214757"],
+        params: [splitString[1], "Modelo20240310233154"],
         id: 1,
       });
       console.log(response.data.result);
