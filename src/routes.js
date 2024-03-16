@@ -24,19 +24,19 @@ export const routes = [
         pages: [
             {
                 icon: <AdjustmentsHorizontalIcon {...icon} />,
-                name: "Senas",
+                name: "Señas",
                 path: "/Senas",
                 //element: <Notifications />,
             },
             {
                 icon: <AdjustmentsHorizontalIcon {...icon} />,
-                name: "Crear Sena",
+                name: "Crear Seña",
                 path: "/Opciones/CrearSenia",
                 //element: <Notifications />,
             },
             {
                 icon: <AdjustmentsHorizontalIcon {...icon} />,
-                name: "Test Senia",
+                name: "Test Seña",
                 path: "/Opciones/TestSenia",
                 //element: <Notifications />,
             },
