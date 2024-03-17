@@ -12,6 +12,8 @@ import {
   CardBody,
   CardFooter,
   Collapse,
+  Select,
+  Option,
 } from "@material-tailwind/react";
 
 import { Dialog_Error, Loader, Notification } from "@/widgets"; //Importar el componente
@@ -28,6 +30,7 @@ export default function Test_Senia_OP() {
   const [prediccion, setPrediccion] = useState("");
   //Conceptos
   useEffect(() => {
+    ObtenerListaModelos();
     Simon();
   }, []);
 
@@ -220,29 +223,31 @@ export default function Test_Senia_OP() {
     const splitString = imgBase642.split("data:image/png;base64,");
     //console.log(splitString[1]);
     //enviar al RPC
-    try {
-      setLoading(true);
-      setOcupado(true);
-      console.log("enviando");
-      const response = await axios.post("http://localhost:4000", {
-        jsonrpc: "2.0",
-        method: "PredecirImagen",
-        //el segundo parametro es el modelo a usar para la prediccion
-        params: [splitString[1], "Modelo20240310233154"],
-        id: 1,
-      });
-      console.log(response.data.result);
-      setPrediccion(response.data.result);
-      //formar la oracion skere
-      const OracionAux = oracion;
-      setOracion(OracionAux + " " + response.data.result);
-      setLoading(false);
-      speak(OracionAux + " " + response.data.result);
-    } catch (error) {
-      setLoading(false);
-      alert("Error");
-      console.log(error);
-    }
+    if (modeloSeleccionado != "") {
+      try {
+        setLoading(true);
+        setOcupado(true);
+        console.log("enviando");
+        const response = await axios.post("http://localhost:4000", {
+          jsonrpc: "2.0",
+          method: "PredecirImagen",
+          //el segundo parametro es el modelo a usar para la prediccion
+          params: [splitString[1], modeloSeleccionado],
+          id: 1,
+        });
+        console.log(response.data.result);
+        setPrediccion(response.data.result);
+        //formar la oracion skere
+        const OracionAux = oracion;
+        setOracion(OracionAux + " " + response.data.result);
+        setLoading(false);
+        speak(OracionAux + " " + response.data.result);
+      } catch (error) {
+        setLoading(false);
+        alert("Error");
+        console.log(error);
+      }
+    } else alert("Seleccione un modelo");
   };
 
   //text to speech
@@ -257,6 +262,33 @@ export default function Test_Senia_OP() {
   const limpiar = () => {
     setOracion("");
     setPrediccion("");
+  };
+  //funcion para almacenar el modelo seleccionado
+  const [modeloSeleccionado, setModeloSeleccionado] = useState("");
+  const [ListaModelos, setListaModelos] = useState([]);
+
+  //funcion para ejecutar en el useEffect que cargue la lista de los modelos
+  const ObtenerListaModelos = async () => {
+    //alert(id_pregunta + " " + buscar + " " + id_nivel);
+    setLoading(true);
+
+    try {
+      //alert("Buscando");
+      const response = await axios.post("http://localhost:4000", {
+        jsonrpc: "2.0",
+        method: "listar_modelos",
+        id: 1,
+      });
+      const resultados = await JSON.parse(response.data.result);
+
+      setListaModelos(resultados);
+      console.log(resultados);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      alert("Error");
+      console.log(error);
+    }
   };
   return (
     <Card className="h-full w-full mt-2 bg-transparent shadow-none">
@@ -309,6 +341,15 @@ export default function Test_Senia_OP() {
 
           <Collapse open={true}>
             <Card className="my-4 mx-auto w-full">
+              <div className="w-72 mx-auto mt-2">
+                <Select label="Seleccionar Modelo">
+                  {ListaModelos.map(({ nombre }, index) => (
+                    <Option onClick={() => setModeloSeleccionado(nombre)}>
+                      {nombre}
+                    </Option>
+                  ))}
+                </Select>
+              </div>
               <CardBody>
                 {/* PARA LOS VIDEOS*/}
 
